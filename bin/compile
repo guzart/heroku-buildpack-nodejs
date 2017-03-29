@@ -14,7 +14,7 @@ DEFAULT_CACHE="node_modules bower_components"
 
 ### Configure directories
 
-BUILD_DIR=${1:-}
+BUILD_DIR="${1:-}/web"
 CACHE_DIR=${2:-}
 ENV_DIR=${3:-}
 BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
@@ -168,6 +168,13 @@ cache_build() {
 
 header "Caching build"
 cache_build | output "$LOG_FILE"
+
+build_assets() {
+  yarn build 2>&1
+}
+
+header "Building assets"
+build_assets | output "$LOG_FILE"
 
 summarize_build() {
   if $NODE_VERBOSE; then

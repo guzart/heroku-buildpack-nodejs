@@ -28,6 +28,9 @@ run_if_present() {
 yarn_node_modules() {
   local build_dir=${1:-}
 
+  echo "Instaling elm"
+  yarn global add elm 2>&1
+
   echo "Installing node modules (yarn.lock)"
   cd "$build_dir"
   yarn install --pure-lockfile --ignore-engines 2>&1
@@ -35,6 +38,9 @@ yarn_node_modules() {
 
 npm_node_modules() {
   local build_dir=${1:-}
+
+  echo "Instaling elm"
+  npm install -g elm
 
   if [ -e $build_dir/package.json ]; then
     cd $build_dir

@@ -172,7 +172,10 @@ cache_build | output "$LOG_FILE"
 
 build_assets() {
   yarn build 2>&1
-  cp "$BUILD_DIR/build/*.js" "$BUILD_DIR/build/*.html" "$ROOT_DIR/public"
+  pushd "$BUILD_DIR/build"
+  cp index.html "$ROOT_DIR/public" 2>&1
+  cp *.js "$ROOT_DIR/public" 2>&1
+  popd
 }
 
 header "Building assets"
